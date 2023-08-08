@@ -15,10 +15,10 @@ vap domain 1
  peer-keepalive local 192.168.2.140 peer 192.168.2.141 Mgmt 0
 !
 interface HundredGigabitEthernet 0/55
- port-group 1 mode active
+ port-group 1
 !
 interface HundredGigabitEthernet 0/56
- port-group 1 mode active
+ port-group 1
 !
 interface AggregatePort 1
  no mac-address-learning
