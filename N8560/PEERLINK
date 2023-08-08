@@ -1,0 +1,27 @@
+vlan 4094
+ name MLAG
+!
+vlan range 80,82,2000-2001
+!
+interface VLAN 4094
+ ip address 12.0.2.1 255.255.255.0
+!
+interface Mgmt 0
+ ip address 192.168.2.140 255.255.255.0
+!
+vap domain 1
+ priority 5
+ data-sync local 12.0.2.1 peer 12.0.2.2
+ peer-keepalive local 192.168.2.140 peer 192.168.2.141 Mgmt 0
+!
+interface HundredGigabitEthernet 0/55
+ port-group 1 mode active
+!
+interface HundredGigabitEthernet 0/56
+ port-group 1 mode active
+!
+interface AggregatePort 1
+ no mac-address-learning
+ switchport mode trunk
+ peer-link
+!
