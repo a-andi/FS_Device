@@ -1,0 +1,29 @@
+port-channel 51 lacp-mode dynamic
+!
+vlan database
+ vlan 4094 name MLAG
+!
+interface eth-0-51
+ description PEERLINK_MLAG
+ switchport mode trunk
+ switchport trunk allowed vlan all
+ channel-group 51 mode active
+!
+interface eth-0-52
+ description PEERLINK_MLAG
+ switchport mode trunk
+ switchport trunk allowed vlan all
+ channel-group 51 mode active
+!
+interface agg51
+ switchport mode trunk
+ switchport trunk allowed vlan all
+ spanning-tree port disable
+!
+interface vlan4094
+ ip address 12.0.1.3/24
+!
+mlag configuration
+ peer-link agg51
+ peer-address 12.0.1.4
+ exit
