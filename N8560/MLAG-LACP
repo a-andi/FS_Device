@@ -1,0 +1,16 @@
+# Switch A and Switch B same to Configuartion#
+
+lacp system-priority 4096
+!
+vlan range 10,40,42
+!
+interface TFGigabitEthernet 0/47
+ port-group 48 mode active
+!
+interface TFGigabitEthernet 0/48
+ port-group 48 mode active
+!
+interface AggregatePort 48
+ switchport mode trunk
+ switchport trunk allowed vlan only 10,40-42
+ vap 48
